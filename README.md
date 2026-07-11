@@ -28,7 +28,7 @@ Si no lo activas, igual funciona usando siempre `index.php?ruta=...` explícitam
 ✅ `DatabaseConnection` (Singleton + PDO + prepared statements)
 ✅ `ValidationService` (clase estática, Punto 28)
 ✅ `SanitizerService` (clase estática, Punto 29-30, incluye formato título)
-✅ `FirmaDigitalService` — **OpenSSL real** (RSA 2048 bits + `openssl_sign`/`openssl_verify`, Puntos 16 y 27)
+✅ `FirmaDigitalService` — **OpenSSL real** (RSA 2048 bits + `openssl_sign`/`openssl_verify)
 ✅ Modelos: `Colaborador`, `PerfilLaboral` (con lógica de promoción), catálogos
 ✅ Controladores: `ColaboradorController`, `PerfilLaboralController`, `ReporteController`
 ✅ Vistas con CSS a color, responsive, footer con copyright 2026
@@ -36,22 +36,4 @@ Si no lo activas, igual funciona usando siempre `index.php?ruta=...` explícitam
 ✅ Exportación a Excel (.xls) del reporte
 ✅ Script SQL con tablas nuevas + Foreign Keys (ON DELETE RESTRICT, ON UPDATE CASCADE)
 ✅ Modal "Dar de Baja" con campo Motivo (habilitado solo en ese contexto)
-
-## 4. IMPORTANTE: llaves OpenSSL
-
-El proyecto incluye un par de llaves RSA ya generadas en `app/Config/keys/`:
-- `private_key.pem` — usada para FIRMAR (nunca debería ser pública en un proyecto real, pero se incluye aquí para que el proyecto funcione de inmediato)
-- `public_key.pem` — usada para VERIFICAR
-
-**Si vas a subir el repositorio a GitHub y es público**, considera regenerar tus propias llaves y no subir la privada, o explica en tu entrega que es solo para fines académicos.
-
-Para regenerar las llaves tú mismo (opcional):
-```bash
-openssl genrsa -out app/Config/keys/private_key.pem 2048
-openssl rsa -in app/Config/keys/private_key.pem -pubout -out app/Config/keys/public_key.pem
-```
-
-## 5. Si ya habías importado la base de datos antes
-
-La columna `firma_digital` cambió de `VARCHAR(255)` a `TEXT` porque las firmas RSA en base64 son más largas (~344 caracteres) que un hash simple. **Vuelve a importar `database/02_schema_complementario.sql`** (recreará las tablas `colaboradores` y `perfiles_laborales` desde cero — perderás los datos de prueba que tengas, pero es lo esperado en esta etapa de desarrollo).
 
