@@ -1,0 +1,6 @@
+﻿<table border="1"><tr>
+                <th>Identidad</th><th>Nombre</th><th>Apellido</th>
+                <th>Ocupación</th><th>Planilla</th><th>Tipo Empleado</th>
+                <th>Salario</th><th>Fecha Inicio</th><th>Fecha Fin</th>
+                <th>Activo</th><th>Integridad</th>
+              </tr><tr><td>8-992-2182</td><td>Luis</td><td>De León</td><td>ABOGADO I</td><td>Eventual</td><td>Eventual</td><td>150089.00</td><td>2026-07-11</td><td>2026-07-11</td><td>No</td><td>Válida</td></tr><tr><td>8-992-2182</td><td>Luis</td><td>De León</td><td>ALBAÑIL</td><td>Interino</td><td>Práctica Profesional</td><td>6000.00</td><td>2026-07-11</td><td></td><td>Sí</td><td>Válida</td></tr><tr><td>3-456-789</td><td>Patric</td><td>Roble</td><td>JEFE DE PRENSA</td><td>Interino</td><td>Interino</td><td>25678.00</td><td>2026-07-11</td><td></td><td>Sí</td><td>Válida</td></tr><tr><td>8-992-2180</td><td>Jeremy</td><td>Rodriguez</td><td>JEFE DEL DEPTO. DE GEST. DE CALIDAD</td><td>Permanente</td><td>Por Contrato</td><td>15000.00</td><td>2026-07-11</td><td></td><td>Sí</td><td>Válida</td></tr></table>

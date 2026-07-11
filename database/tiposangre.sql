@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 10-07-2026 a las 23:13:58
+-- Tiempo de generación: 11-07-2026 a las 00:47:05
 -- Versión del servidor: 8.4.7
 -- Versión de PHP: 8.3.28
 
@@ -841,15 +841,116 @@ INSERT INTO `cat_tipoempleado` (`id`, `Nombre`, `Activo`, `Abreviatura`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `cat_tipos_planilla`
+--
+
+DROP TABLE IF EXISTS `cat_tipos_planilla`;
+CREATE TABLE IF NOT EXISTS `cat_tipos_planilla` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_tipo_planilla_nombre` (`nombre`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `cat_tipos_planilla`
+--
+
+INSERT INTO `cat_tipos_planilla` (`id`, `nombre`) VALUES
+(2, 'Eventual'),
+(3, 'Interino'),
+(1, 'Permanente');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `colaboradores`
+--
+
+DROP TABLE IF EXISTS `colaboradores`;
+CREATE TABLE IF NOT EXISTS `colaboradores` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `identidad` varchar(20) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `apellido` varchar(50) NOT NULL,
+  `edad` int NOT NULL,
+  `tipo_sangre_id` int NOT NULL,
+  `sexo_id` int NOT NULL,
+  `nacionalidad` varchar(50) NOT NULL,
+  `ruta_id` int NOT NULL,
+  `correo` varchar(100) NOT NULL,
+  `celular` varchar(20) NOT NULL,
+  `empleado_activo` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_colaborador_identidad` (`identidad`),
+  UNIQUE KEY `uq_colaborador_correo` (`correo`),
+  UNIQUE KEY `uq_colaborador_celular` (`celular`),
+  KEY `fk_colaborador_tipo_sangre` (`tipo_sangre_id`),
+  KEY `fk_colaborador_sexo` (`sexo_id`),
+  KEY `fk_colaborador_ruta` (`ruta_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `colaboradores`
+--
+
+INSERT INTO `colaboradores` (`id`, `identidad`, `nombre`, `apellido`, `edad`, `tipo_sangre_id`, `sexo_id`, `nacionalidad`, `ruta_id`, `correo`, `celular`, `empleado_activo`, `created_at`, `updated_at`) VALUES
+(1, '8-992-2180', 'Jeremy', 'Rodriguez', 34, 4, 2, 'Panameña', 4, 'weqwe@gamail.com', '23345567', 1, '2026-07-10 23:40:05', '2026-07-10 23:40:05'),
+(2, '8-992-2182', 'Luis', 'De León', 18, 7, 2, 'Panameña', 1, 'weqwe@gamaril.com', '23345556', 1, '2026-07-10 23:44:25', '2026-07-11 00:44:28'),
+(3, '3-456-789', 'Patric', 'Roble', 20, 4, 2, 'Panameña', 3, 'casa@gmmail.com', '64567888', 1, '2026-07-11 00:24:32', '2026-07-11 00:24:32');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `perfiles_laborales`
+--
+
+DROP TABLE IF EXISTS `perfiles_laborales`;
+CREATE TABLE IF NOT EXISTS `perfiles_laborales` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `colaborador_id` int NOT NULL,
+  `ocupacion_id` int NOT NULL,
+  `tipo_planilla_id` int NOT NULL,
+  `tipo_empleado_id` int NOT NULL,
+  `salario` decimal(10,2) NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_fin` date DEFAULT NULL,
+  `es_activo` tinyint(1) NOT NULL DEFAULT '1',
+  `motivo_baja_id` int DEFAULT NULL,
+  `firma_digital` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `fk_perfil_colaborador` (`colaborador_id`),
+  KEY `fk_perfil_ocupacion` (`ocupacion_id`),
+  KEY `fk_perfil_tipo_planilla` (`tipo_planilla_id`),
+  KEY `fk_perfil_tipo_empleado` (`tipo_empleado_id`),
+  KEY `fk_perfil_motivo_baja` (`motivo_baja_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `perfiles_laborales`
+--
+
+INSERT INTO `perfiles_laborales` (`id`, `colaborador_id`, `ocupacion_id`, `tipo_planilla_id`, `tipo_empleado_id`, `salario`, `fecha_inicio`, `fecha_fin`, `es_activo`, `motivo_baja_id`, `firma_digital`, `created_at`) VALUES
+(1, 2, 1, 2, 1, 150089.00, '2026-07-11', '2026-07-11', 0, NULL, 'w+tq/2dt/Hm+WPHjupknQtPG7L9faNlSR81OqDchL7Gmj2Rmje8q5pLXKSuvYxXYm+qhZcvhE/rl9FW+pJwCkeOIjg1Xhvmfjo3Z0XdMDE6FXe4aQ58VqLMm8IJmeC47AtEb3ZZmJO3faztYRljQ2YcTbz4Sje7ccuReU0Vqoe/XaxkRspTM16VK3xwR2zLuzz+ZyuSrs37mpgjOByiezD8VdgtILdBmsbjzbrDOvwjkt+jtJc/C8oOINiYaQp7DCW6uAKAVu5ohbbXhQUp8FDigr6UpZULXDXU22pM6R20DrlGrX077SRC/uL+3UqJc1WFHbqvGL5kSa3Deb+jAbA==', '2026-07-11 00:44:14'),
+(2, 3, 144, 3, 8, 25678.00, '2026-07-11', NULL, 1, NULL, 'v1YMOYYvAi2Cq5z4+obrf3aQntp8nsmAf0ZldyfnDcuoJX6AHTy4p4js+jkRhkdhr7/AYgEUL1N8Qe8N6RHF6V44LzLNAK4QOiTDu3J+U8sPhB/C3xAGOpGMRFrUkGTBZnHZQkwOJkqW5s/YdcdwKHOVxmXFLLuHREsRftJTWaB7cYS4O6Ru9T8ZSih2ukfq8K9NV7b9w+Ba9hfUXlRuSImWYun5CPYpRF1w7yt0YZSgcDYfQj0LX1aRJxk8s2FF1eAqkoFtxbvGnoGQ7ULbct2LYW9lIeM1rxh61MPuIcBRjZRmhg03ND6jM6LtiMk0jMXtpeKfEndZlybf5Bb4Xg==', '2026-07-11 00:44:59'),
+(3, 1, 850, 1, 2, 15000.00, '2026-07-11', NULL, 1, NULL, '0G0ghEg9j1261OWL9dtRTzYcruAp1Hp9j+uaUTtUoMxe9+YkzYx+29YNgAiNEys6v+Om3kmWLl1yNYyfNaSuWqF172TT93FB3JKKaEnvfXNFbBWbstVRJZTZfVD+B2neUpePuMUj7EFVIISgQKeUj1gTW7aiHMa+hon1oFr7dXfF+AdSle1KXLip+6tvKR2Uq+5XusU0v5gV/a1EgvYROFFUef/zH6NSOS/Idh1oK9oEohmvXCkFjliA1BGnvLiRlX9/dYpQfxDC5fgwW4pST/HMQpGV7BLdghYaO/AHr0YbpORXsfLzJPNrjG/QKOmEJ21AaDw32Xn/JvkJEKDs+A==', '2026-07-11 00:45:37'),
+(4, 2, 9, 3, 6, 6000.00, '2026-07-11', NULL, 1, NULL, 'gD6znvutjD9XzHxFGyBILIcaHSC27sZ/HG4BkFxIy1ZglMab4sNmp2O9F3b6apSNK9IIsRzqrCdd9S1DtmN6Hhwkqi46enu645yHUv+OiqZZYdbq153ArGizCcubA4O1N4H78kKk36yDH1mO+U+XLa752LO9J7x0nPwsUqiEDiTtLVwb7iBr/iUFkt1pe4JojqTM++L284ZHlFRdFqYoFGOz86umTltB4Va5lyPB7silkaICIlJ3ANoQXSTEexlEKrN5oASM+1p338fXLIf9vVWmc84aH8IYgcb+OYyKbdXxlQWkw4Oos+yxACcDDyKRJmMQxwNMaw6R6bFSuncyQw==', '2026-07-11 00:46:39');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tiposangre`
 --
 
 DROP TABLE IF EXISTS `tiposangre`;
 CREATE TABLE IF NOT EXISTS `tiposangre` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `Nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `tiposangre`
@@ -864,6 +965,28 @@ INSERT INTO `tiposangre` (`id`, `Nombre`) VALUES
 (6, 'B+'),
 (7, 'AB-'),
 (8, 'AB+');
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `colaboradores`
+--
+ALTER TABLE `colaboradores`
+  ADD CONSTRAINT `fk_colaborador_ruta` FOREIGN KEY (`ruta_id`) REFERENCES `cat_rutas` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_colaborador_sexo` FOREIGN KEY (`sexo_id`) REFERENCES ` cat_sexo` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_colaborador_tipo_sangre` FOREIGN KEY (`tipo_sangre_id`) REFERENCES `tiposangre` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `perfiles_laborales`
+--
+ALTER TABLE `perfiles_laborales`
+  ADD CONSTRAINT `fk_perfil_colaborador` FOREIGN KEY (`colaborador_id`) REFERENCES `colaboradores` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_perfil_motivo_baja` FOREIGN KEY (`motivo_baja_id`) REFERENCES `cat_motivos_terminacion` (`C_TERMINACION`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_perfil_ocupacion` FOREIGN KEY (`ocupacion_id`) REFERENCES `cat_ocupaciones` (`C_OCUP`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_perfil_tipo_empleado` FOREIGN KEY (`tipo_empleado_id`) REFERENCES `cat_tipoempleado` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_perfil_tipo_planilla` FOREIGN KEY (`tipo_planilla_id`) REFERENCES `cat_tipos_planilla` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

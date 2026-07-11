@@ -55,16 +55,3 @@ openssl rsa -in app/Config/keys/private_key.pem -pubout -out app/Config/keys/pub
 
 La columna `firma_digital` cambió de `VARCHAR(255)` a `TEXT` porque las firmas RSA en base64 son más largas (~344 caracteres) que un hash simple. **Vuelve a importar `database/02_schema_complementario.sql`** (recreará las tablas `colaboradores` y `perfiles_laborales` desde cero — perderás los datos de prueba que tengas, pero es lo esperado en esta etapa de desarrollo).
 
-## 6. Pendiente / a revisar contigo
-
-- [ ] Probar el flujo completo end-to-end en tu Wamp (registrar colaborador → asignar perfil → promover → dar de baja)
-- [ ] Revisar si el profesor exige que "Motivo de Baja" sea catálogo (`cat_motivos_terminacion`, ya implementado así) o texto libre
-- [ ] Confirmar el rango de validación de "Nacionalidad" (¿selector fijo o texto libre? actualmente es texto libre sanitizado)
-- [ ] Decidir cómo interpretar "el reporte con temas separados por comas" (¿tabla normal o formato de línea con comas?)
-- [ ] Verificar si `cat_tipos_planilla` debe tener 4 tipos en vez de 3 (el documento menciona "Planilla (1,2,3,4)" en la sección de firma)
-
-## 7. Notas técnicas importantes
-
-- La tabla `` cat_sexo`` tiene un espacio en el nombre en el dump original — el modelo `CatSexo.php` ya lo maneja con backticks correctamente, no lo cambies a menos que también edites el modelo.
-- La tabla `tiposangre` venía en motor MyISAM; el script `02_schema_complementario.sql` la convierte a InnoDB (necesario para que funcione como FK).
-- La vinculación entre `colaboradores` y `perfiles_laborales` es por `colaborador_id` (autonumérico), nunca por `identidad`, tal como exige la rúbrica.
