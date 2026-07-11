@@ -1,0 +1,359 @@
+/* ==========================================================
+   iTECH Contrataciones - Estilos principales
+   Paleta corporativa: azul marino + celeste + acentos
+   ========================================================== */
+
+:root {
+    --color-primario: #0b3d91;
+    --color-primario-claro: #1565c0;
+    --color-secundario: #00acc1;
+    --color-fondo: #f4f7fb;
+    --color-tarjeta: #ffffff;
+    --color-texto: #1c1c1c;
+    --color-exito: #2e7d32;
+    --color-exito-bg: #e8f5e9;
+    --color-error: #c62828;
+    --color-error-bg: #fdecea;
+    --color-info-bg: #e3f2fd;
+    --color-borde: #dbe3ee;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+.contenedor {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ===== Header ===== */
+.app-header {
+    background: linear-gradient(90deg, var(--color-primario), var(--color-primario-claro));
+    color: white;
+    padding: 18px 0;
+}
+
+.app-header .contenedor {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.app-header h1 {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.app-nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 18px;
+    font-weight: 500;
+    opacity: 0.9;
+    transition: opacity 0.2s ease;
+}
+
+.app-nav a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* ===== Tarjetas ===== */
+.tarjeta {
+    background: var(--color-tarjeta);
+    border-radius: 10px;
+    padding: 28px;
+    margin: 30px 0;
+    box-shadow: 0 2px 10px rgba(11, 61, 145, 0.08);
+}
+
+.tarjeta h2 {
+    margin-top: 0;
+    color: var(--color-primario);
+    border-bottom: 2px solid var(--color-borde);
+    padding-bottom: 12px;
+}
+
+/* ===== Formularios ===== */
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.fila {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.grupo-formulario {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #444;
+}
+
+input, select, textarea {
+    padding: 10px 12px;
+    border: 1px solid var(--color-borde);
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #fff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--color-secundario);
+    box-shadow: 0 0 0 3px rgba(0, 172, 193, 0.2);
+}
+
+input[readonly] {
+    background-color: #eef1f6;
+    color: #777;
+}
+
+.error {
+    color: var(--color-error);
+    font-size: 0.85rem;
+}
+
+/* ===== Botones ===== */
+.btn {
+    display: inline-block;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.2s ease;
+}
+
+.btn-primario {
+    background-color: var(--color-primario);
+    color: white;
+}
+
+.btn-primario:hover {
+    background-color: var(--color-primario-claro);
+    box-shadow: 0 4px 12px rgba(11, 61, 145, 0.3);
+    transform: translateY(-1px);
+}
+
+.btn-secundario {
+    background-color: var(--color-secundario);
+    color: white;
+}
+
+.btn-secundario:hover {
+    background-color: #00838f;
+    transform: translateY(-1px);
+}
+
+.btn-peligro {
+    background-color: var(--color-error);
+    color: white;
+}
+
+.btn-peligro:hover {
+    background-color: #a51c1c;
+    transform: translateY(-1px);
+}
+
+.btn-pequeno {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    margin-right: 6px;
+}
+
+/* ===== Alertas / Flash messages ===== */
+.alerta {
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin: 20px 0;
+    font-weight: 500;
+}
+
+.alerta-exito {
+    background-color: var(--color-exito-bg);
+    color: var(--color-exito);
+    border: 1px solid #a5d6a7;
+}
+
+.alerta-error {
+    background-color: var(--color-error-bg);
+    color: var(--color-error);
+    border: 1px solid #ef9a9a;
+}
+
+.alerta-info {
+    background-color: var(--color-info-bg);
+    color: var(--color-primario);
+    border: 1px solid #90caf9;
+}
+
+/* ===== Tablas ===== */
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla th, .tabla td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-borde);
+}
+
+.tabla th {
+    background-color: var(--color-fondo);
+    color: var(--color-primario);
+    font-weight: 700;
+}
+
+.tabla tbody tr:hover {
+    background-color: #f7fafd;
+}
+
+.sin-datos {
+    text-align: center;
+    color: #888;
+    padding: 24px !important;
+}
+
+.cabecera-reporte {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    border-bottom: 2px solid var(--color-borde);
+    padding-bottom: 12px;
+}
+
+.cabecera-reporte h2 {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* ===== Etiquetas de estado ===== */
+.etiqueta {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.etiqueta-verde {
+    background-color: var(--color-exito-bg);
+    color: var(--color-exito);
+}
+
+.etiqueta-roja {
+    background-color: var(--color-error-bg);
+    color: var(--color-error);
+}
+
+.etiqueta-gris {
+    background-color: #eceff1;
+    color: #607d8b;
+}
+
+/* ===== Indicadores de integridad (firma digital) ===== */
+.integridad-verde {
+    color: var(--color-exito);
+    font-weight: 700;
+}
+
+.integridad-rojo {
+    color: var(--color-error);
+    font-weight: 700;
+}
+
+/* ===== Footer ===== */
+.app-footer {
+    background-color: var(--color-primario);
+    color: #cfe0f7;
+    text-align: center;
+    padding: 18px 0;
+    margin-top: 60px;
+    font-size: 0.9rem;
+}
+
+/* ===== Modal (Dar de Baja) ===== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(11, 61, 145, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-caja {
+    background-color: var(--color-tarjeta);
+    border-radius: 10px;
+    padding: 28px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-caja h3 {
+    margin-top: 0;
+    color: var(--color-primario);
+}
+
+.modal-descripcion {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 18px;
+}
+
+.modal-acciones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 700px) {
+    .fila {
+        flex-direction: column;
+    }
+    .app-header .contenedor {
+        flex-direction: column;
+        text-align: center;
+    }
+    .cabecera-reporte {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .tabla {
+        font-size: 0.85rem;
+    }
+}
